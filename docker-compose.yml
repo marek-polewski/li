@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build: builds/feature_server/.
+    image: mp/feature_server
+    depends_on:
+     - db
+    links:
+     - db
+  db:
+    build: builds/post_gis
+    image: mp/post_gis
+  lb:
+    build: builds/loadbalancer
+    image: mp/nginx_fs
+    depends_on:
+     - web
+    links:
+     - web
+    ports:
+     - "8080:80"
