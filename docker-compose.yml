@@ -1,7 +1,8 @@
+
 version: '3'
 services:
   web:
-    build: builds/feature_server/.
+    build: builds/feature_server
     image: mp/feature_server
     depends_on:
      - db
