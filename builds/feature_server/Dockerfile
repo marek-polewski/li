@@ -11,18 +11,11 @@ RUN apt-get update && \
 # apache config
 COPY 000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
-# python packages needed for feature server
-#COPY requirements.txt /tmp/
-#RUN pip install --requirement /tmp/requirements.txt
-
-
 # copy source
 RUN wget --no-check-certificate -qO- https://github.com/iocast/featureserver/archive/master.tar.gz | tar xvz -C /var/www/ && \
 	rm -rf /var/www/html/ && mv /var/www/featureserver-master /var/www/html
 # feature server config
 COPY featureserver.cfg /var/www/html/featureserver.cfg
-
-
 
 ENV APACHE_RUN_USER=www-data \
 	APACHE_RUN_GROUP=www-data \
